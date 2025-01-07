@@ -1,0 +1,40 @@
+create table E_Commerce_analaystic.Users(
+user_id int primary key auto_increment,
+name varchar(100),
+email varchar(100) unique,
+signup_date Date,
+coutry varchar(50)
+);
+CREATE TABLE e_commerce_analaystic.Products (
+    product_id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255),
+    category VARCHAR(100),
+    price DECIMAL(10,2),
+    stock_quantity INT
+);
+CREATE TABLE Orders
+( order_id int primary key auto_increment,
+user_id int,
+order_data datetime,
+total_amount decimal(10,2),
+status enum('Completed', 'Pending', 'Cancelled'),
+foreign key(user_id) references Users(user_id)
+);
+create table Payments (
+payment_id int primary key auto_increment,
+order_id int,
+payment_data datetime,
+payment_method enum('Credit Card','Debit Card','Paypal','Bank Transfer'),
+payment_status enum('Success','Failure'),
+foreign key(order_id) references Orders(order_id)
+);
+CREATE TABLE Reviews (
+    review_id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT,
+    product_id INT,
+    rating INT CHECK (rating BETWEEN 1 AND 5),
+    review_text TEXT,
+    review_date DATETIME,
+    FOREIGN KEY (user_id) REFERENCES Users(user_id),
+    FOREIGN KEY (product_id) REFERENCES Products(product_id)
+);
