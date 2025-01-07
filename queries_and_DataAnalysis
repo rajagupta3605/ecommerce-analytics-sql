@@ -1,0 +1,71 @@
+-- Top 5 expensive Product
+select * from e_commerce_analaystic.Products order by price desc limit 5;
+-- category where stock_quantity less than 50
+select name from e_commerce_analaystic.Products where stock_quantity < 50;
+-- cateory and total number of element
+select category,count(*) as Total_category from e_commerce_analaystic.Products group by category;
+-- Cheapest category
+select *, price from e_commerce_analaystic.Products order by price limit 5;
+-- Find Cheapest Product in Each Category:
+select category,any_value(name) as Product_Name, MIN(price) as Lowest_price from e_commerce_analaystic.Products group by category;
+
+-- Total Revenue from Completed Orders
+select sum(total_amount) from Orders where status='Completed';
+-- Orders Count by Status
+select status, count(*) as total_order from Orders group by status;
+-- Find Orders from the Last 30 Days
+select * from Orders where order_data >= date_sub(curdate(), interval 1 year);
+-- Find Users with the Most Completed Orders
+select user_id, count(*) as Completed_Orders from Orders group by user_id order by Completed_Orders desc limit 5;
+
+-- Total Payments by Method:
+select payment_method, count(payment_method) Total_Payment from Payments group by payment_method;
+-- Find All Failed Payments:
+select * from Payments where payment_status="Failure";
+-- Get Payment Success Rate per Method:
+select payment_method, 
+sum(case when payment_status='Success' then 1 else 0 end) as success_count,
+count(*) as Total_attempts,
+(sum(case when payment_status='Success' then 1 else 0 end)/count(*))*100 as Success_rate
+from Payments
+Group by payment_method;
+-- Recent Successful Payments (Last 7 Days):
+select * from Payments where payment_status='Success' and payment_data>=date_sub(now(), interval 1 year);
+
+--  Find Products with the Highest Average Rating
+select product_id, avg(rating) as avg_rating, count(*) as total_reviews from Reviews group by product_id order by avg_rating desc limit 5;
+-- Find Users Who Left the Most Reviews
+select user_id, count(*) as Total_Reviews from Reviews
+group by user_id order by Total_Reviews desc limit 5;
+-- Get the Most Recent Reviews
+select * from Reviews order by review_date desc limit 5;
+-- Find Products with Negative Reviews (1 or 2 Stars)
+select product_id, count(*) as bad_review from Reviews where rating <=2 group by product_id order by bad_review desc;
+
+## SQL Queries for Analytics
+-- 1.Group customers based on their spending behavior.
+--  1.1 How many users signed up in the last 3 months?
+select count(*) as total_users_signup_in_last_3mon from users where signup_date >= date_sub(now(), interval 3 month );
+-- 2.2 Which country has the highest number of registered users?
+select country, count(*) as Num_of_users from users group by country order by Num_of_users desc limit 5;
+-- Find the most active users (users who placed the most orders).
+select user_id, count(order_id) as most_active_users from orders group by order_id order by most_active_users desc limit 5;
+-- Find the most active users (users who placed the most orders) by name.
+select u.user_id, u.name, u.email, count(o.order_id) as most_active_users from users u join orders o on u.user_id = o.user_id group by order_id, name order by most_active_users desc limit 5;
+-- 2. Product Performance
+-- 3 Sales & Revenue Insights
+-- 3.1 What is the total revenue generated in the last 1 year?
+select sum(total_amount) from orders where order_data >= date_sub(now(),interval 1 year);
+-- Find the month-wise revenue trend
+select date_format(order_data, '%y-%m') as Month, sum(total_amount) as revenue from orders group by Month order by Month;
+-- Which payment method is most used by customers?
+select payment_method, count(payment_method) as Most_use_PaymentMethod from payments group by payment_method order by Most_use_PaymentMethod desc;
+-- 5. Reviews & Ratings Analysis
+--  5.1 Which products have the best average rating
+select product_id, avg(rating) as Avg_rating from reviews group by product_id order by Avg_rating desc;
+-- 5.2 Which products have received the most negative reviews (ratings 1 or 2)?
+select p.product_id, p.name, r.rating from reviews r join products p on r.product_id=p.product_id where rating<=2; 
+select review_text, count(*) as frequency from Reviews group by review_text order by frequency desc limit 10;
+-- 6. Seasonal & Trend Analysis
+-- 6.1 Which months have the highest number of orders
+select date_format(order_data,'%y-%m') as month, count(order_id) as total_order from orders group by month order by total_order;
