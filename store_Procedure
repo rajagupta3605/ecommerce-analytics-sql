@@ -1,0 +1,11 @@
+Delimiter //
+create procedure get_daily_sale()
+begin
+	select curdate() as report_date,
+    count(order_id) as total_orders,
+    sum(total_amount) as total_revenue
+    from Orders
+    where date(order_data) = curdate();
+    end //
+delimiter ;
+call get_daily_sale();
