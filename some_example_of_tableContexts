@@ -1,0 +1,94 @@
+insert into E_Commerce_analaystic.Users(name, email, signup_date, country) values
+('Alice Johnson','alice@example.com','2023-01-15','USA'),
+('Bob Smith', 'bob@example.com', '2023-02-20', 'UK'),
+('Charlie Brown', 'charlie@example.com', '2023-03-10', 'Canada'),
+('David Lee', 'david@example.com', '2023-04-25', 'Australia'),
+('Emma Wilson', 'emma@example.com', '2023-05-05', 'Germany'),
+('Frank Garcia', 'frank@example.com', '2023-06-12', 'Spain'),
+('Grace Adams', 'grace@example.com', '2023-07-18', 'India'),
+('Henry Miller', 'henry@example.com', '2023-08-30', 'France'),
+('Isabel Martinez', 'isabel@example.com', '2023-09-22', 'Mexico'),
+('Jack Taylor', 'jack@example.com', '2023-10-10', 'Japan'),
+('Kevin Roberts', 'kevin@example.com', '2023-11-01', 'Brazil'),
+('Laura Clark', 'laura@example.com', '2023-11-15', 'South Africa'),
+('Michael Davis', 'michael@example.com', '2023-12-01', 'USA'),
+('Nancy Thompson', 'nancy@example.com', '2023-12-15', 'Canada'),
+('Oliver Harris', 'oliver@example.com', '2024-01-01', 'UK'),
+('Paul Wright', 'paul@example.com', '2024-01-10', 'Germany'),
+('Quinn Evans', 'quinn@example.com', '2024-01-20', 'India'),
+('Rachel King', 'rachel@example.com', '2024-02-05', 'France'),
+('Steven Green', 'steven@example.com', '2024-02-15', 'Japan'),
+('Tina Lopez', 'tina@example.com', '2024-03-01', 'Mexico');
+## Products
+insert into e_commerce_analaystic.Products(name, category, price, stock_quantity) values
+('Apple iPhone 15', 'Electronics', 999.99, 50),
+('Samsung Galaxy S23', 'Electronics', 899.99, 60),
+('Sony WH-1000XM5 Headphones', 'Electronics', 399.99, 30),
+('Apple MacBook Pro 16"', 'Electronics', 2499.99, 20),
+('Dell XPS 15', 'Electronics', 1799.99, 25);
+-- Insert Clothing & Fashion Products
+INSERT INTO e_commerce_analaystic.Products (name, category, price, stock_quantity) VALUES
+('Nike Air Max 270', 'Fashion', 150.00, 100),
+('Adidas Ultraboost', 'Fashion', 180.00, 80),
+('Ray-Ban Aviator Sunglasses', 'Fashion', 120.00, 50),
+('Levi’s 501 Jeans', 'Fashion', 60.00, 150),
+('North Face Winter Jacket', 'Fashion', 200.00, 40);
+-- Home & kitchen Products
+INSERT INTO e_commerce_analaystic.Products (name, category, price, stock_quantity) VALUES
+('Instant Pot Pressure Cooker', 'Home & Kitchen', 129.99, 70),
+('Dyson V11 Vacuum Cleaner', 'Home & Kitchen', 599.99, 30),
+('Philips Air Fryer', 'Home & Kitchen', 149.99, 50),
+('IKEA Dining Table Set', 'Home & Kitchen', 349.99, 20),
+('Nespresso Coffee Machine', 'Home & Kitchen', 199.99, 45);
+-- Insert Sports & Outdoor Products
+INSERT INTO e_commerce_analaystic.Products (name, category, price, stock_quantity) VALUES
+('Wilson Tennis Racket', 'Sports & Outdoors', 99.99, 60),
+('Trek Mountain Bike', 'Sports & Outdoors', 699.99, 10),
+('Nike Yoga Mat', 'Sports & Outdoors', 49.99, 80),
+('Adidas Soccer Ball', 'Sports & Outdoors', 29.99, 120),
+('Garmin GPS Watch', 'Sports & Outdoors', 249.99, 35);
+-- Insert Books & Stationery
+INSERT INTO e_commerce_analaystic.Products (name, category, price, stock_quantity) VALUES
+('Atomic Habits by James Clear', 'Books', 25.99, 200),
+('Harry Potter Box Set', 'Books', 99.99, 150),
+('Moleskine Notebook', 'Stationery', 19.99, 300),
+('Pilot G2 Gel Pen Pack', 'Stationery', 8.99, 500),
+('Kindle Paperwhite', 'Books', 129.99, 80);
+## Orders
+INSERT INTO Orders (user_id, order_data, total_amount, status) VALUES
+(3, '2024-01-11 15:45:00', 300.00, 'Completed'),
+(7, '2024-01-12 20:05:00', 45.00, 'Pending'),
+(5, '2024-01-13 07:35:00', 189.99, 'Completed'),
+(9, '2024-01-14 14:50:00', 275.00, 'Completed'),
+(2, '2024-01-15 22:20:00', 520.99, 'Cancelled'),
+(1, '2024-01-16 10:00:00', 49.99, 'Completed'),
+(4, '2024-01-17 18:10:00', 699.99, 'Pending'),
+(6, '2024-01-18 12:55:00', 110.75, 'Completed'),
+(8, '2024-01-19 09:30:00', 305.40, 'Cancelled'),
+(10, '2024-01-20 16:15:00', 150.25, 'Pending');
+## Payments
+INSERT INTO Payments (order_id, payment_data, payment_method, payment_status) VALUES
+(1, '2024-01-01 10:30:00', 'Credit Card', 'Success'),
+(2, '2024-01-02 14:15:00', 'Debit Card', 'Success'),
+(3, '2024-01-03 18:45:00', 'PayPal', 'Failure'),
+(4, '2024-01-04 09:00:00', 'Bank Transfer', 'Success'),
+(5, '2024-01-05 11:30:00', 'Credit Card', 'Success'),
+(6, '2024-01-06 16:20:00', 'Debit Card', 'Failure'),
+(7, '2024-01-07 19:10:00', 'PayPal', 'Success'),
+(8, '2024-01-08 07:50:00', 'Bank Transfer', 'Success'),
+(9, '2024-01-09 12:40:00', 'Credit Card', 'Success'),
+(10, '2024-01-10 14:55:00', 'Debit Card', 'Success');
+# REviews
+INSERT INTO Reviews (user_id, product_id, rating, review_text, review_date) VALUES
+(1, 2, 5, 'Amazing phone! The camera quality is fantastic and battery life is great.', '2024-01-10 14:23:00'),
+(2, 3, 4, 'Great headphones with superb noise cancellation, but a bit pricey.', '2024-01-12 10:15:00'),
+(3, 1, 3, 'Decent phone but overpriced for the features it offers.', '2024-01-15 18:45:00'),
+(4, 5, 5, 'MacBook Pro is a beast for performance. Love the display and speed.', '2024-01-20 09:30:00'),
+(5, 7, 2, 'Not comfortable at all. The size runs small.', '2024-01-25 16:10:00'),
+(6, 10, 4, 'Stylish sunglasses, but wish they had more color options.', '2024-02-01 12:00:00'),
+(7, 12, 5, 'Pressure cooker is a lifesaver! Cooking time is reduced significantly.', '2024-02-05 08:20:00'),
+(8, 15, 3, 'Bike quality is good, but packaging was not great. Received with minor scratches.', '2024-02-10 11:40:00'),
+(9, 18, 5, 'Fantastic book! Must-read for anyone looking for self-improvement.', '2024-02-15 14:05:00'),
+(10, 20, 1, 'Terrible pen! Ink dried up within a week.', '2024-02-20 19:00:00');
+INSERT INTO Reviews (user_id, product_id, rating, review_text, review_date) VALUES
+(5, 3, 5, 'Amazing phone! The camera quality is fantastic and battery life is great.', '2024-01-10 14:23:00');
